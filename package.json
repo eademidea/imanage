@@ -1,0 +1,13 @@
+{
+  "name": "imanage",
+  "version": "1.0.0",
+  "description": "Manage my life",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "author": "Conrado J Oliveira",
+  "license": "MIT",
+  "repository": "https://github.com/eademidea/imanage.git",
+  "private": false
+}
