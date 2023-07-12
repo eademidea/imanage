@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node-dev ./src/index.ts",
+    "start": "ts-node-dev ./src/StartApp.ts",
     "test": "jest",
     "start2": "yarn build && node dist/src/index.js"
   },
