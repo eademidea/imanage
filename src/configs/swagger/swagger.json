@@ -3,19 +3,7 @@
     "info": {
         "title": "IManage",
         "description": "Esta é a Api do IManage que consiste em um software de gerenciamento pessoal.",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "email": "apiteam@swagger.io"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        },
         "version": "1.0.11"
-    },
-    "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
     },
     "servers": [
         {
@@ -26,10 +14,30 @@
         {
             "name": "user",
             "description": "Operations about user"
+        },
+        {
+            "name": "goals",
+            "description": "Operations about goals of user"
+        },
+        {
+            "name": "links",
+            "description": "Operations about links of user"
+        },
+        {
+            "name": "menu",
+            "description": "Operations about menu of user"
+        },
+        {
+            "name": "thinking",
+            "description": "Operations about thinkings of user"
+        },
+        {
+            "name": "vault",
+            "description": "Operations about vaults of user"
         }
     ],
     "paths": {
-        "/user": {
+        "/user/signup": {
             "post": {
                 "tags": [
                     "user"
@@ -76,7 +84,7 @@
                 }
             }
         },
-        "/user/login": {
+        "/user/signin": {
             "get": {
                 "tags": [
                     "user"
@@ -142,18 +150,115 @@
                 }
             }
         },
-        "/user/logout": {
-            "get": {
+        "/links/create": {
+            "post": {
                 "tags": [
-                    "user"
+                    "links"
                 ],
-                "summary": "Logs out current logged in user session",
-                "description": "",
-                "operationId": "logoutUser",
-                "parameters": [],
+                "summary": "Create link",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Created user object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "default": {
-                        "description": "successful operation"
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/links/list": {
+            "get": {
+                "tags": [
+                    "links"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
                     }
                 }
             }
