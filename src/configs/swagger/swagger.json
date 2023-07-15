@@ -262,6 +262,458 @@
                     }
                 }
             }
+        },
+        "/menu/create": {
+            "post": {
+                "tags": [
+                    "menu"
+                ],
+                "summary": "Create link",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Created user object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/list": {
+            "get": {
+                "tags": [
+                    "menu"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/thinking/create": {
+            "post": {
+                "tags": [
+                    "thinking"
+                ],
+                "summary": "Create link",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Created user object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/thinking/list": {
+            "get": {
+                "tags": [
+                    "thinking"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/goals/create": {
+            "post": {
+                "tags": [
+                    "goals"
+                ],
+                "summary": "Create link",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Created user object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/goals/list": {
+            "get": {
+                "tags": [
+                    "goals"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/vault/create": {
+            "post": {
+                "tags": [
+                    "vault"
+                ],
+                "summary": "Create link",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "Created user object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vault/list": {
+            "get": {
+                "tags": [
+                    "vault"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
         }
     },
     "components": {
