@@ -1,6 +1,6 @@
 {
   "name": "imanage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Manage my life",
   "main": "index.js",
   "scripts": {
