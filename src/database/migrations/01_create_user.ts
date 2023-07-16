@@ -6,6 +6,9 @@ export async function up(knex: Knex): Promise<void> {
         .createTable(ETablesName.user, table => {
             table.bigIncrements("id").primary().index();
             table.string("name").checkLength("<=", 150).notNullable();
+            table.string("username").unique().notNullable().index()
+            table.string("password").checkLength("<=", 30)
+            table.dateTime("created_at")
             table.comment("Tabela de usuários do sistema.");
 
         }).then(() => {
