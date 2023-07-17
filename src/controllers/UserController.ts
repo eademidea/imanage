@@ -1,13 +1,14 @@
-import { Controller, Get, Post } from '@overnightjs/core';
+import { Controller, Get, Post, Middleware } from '@overnightjs/core';
+import { IUser } from '@src/database/models/User';
 import { Request, Response } from 'express';
-
+import Logger from 'jet-logger';
+import * as yup from "yup"
+import validation from "../validations/UserValidator"
 @Controller("v1/user")
 export class UserController {
 
     @Get('signin')
     public signin(req: Request, res: Response) {
-        console.log(req.query)
-        console.log("Cheguei aqui")
         return res.json({
             message: 'get_called',
         });
@@ -15,11 +16,13 @@ export class UserController {
 
 
     @Post('signup')
-    public signup(req: Request, res: Response) {
-        console.log(req.query)
-        console.log("Cheguei aqui")
+    @Middleware([validation])
+    public signup(req: Request<{}, {}, IUser>, res: Response) {
+        Logger.info(req.body.password, true)
         return res.json({
             message: 'Usuário criado com sucesso...',
         });
     }
+
+
 }

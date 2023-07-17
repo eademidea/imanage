@@ -722,39 +722,27 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
+                        "type": "number",
                         "format": "int64",
                         "example": 10
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "James Stephen"
                     },
                     "username": {
                         "type": "string",
                         "example": "theUser"
                     },
-                    "firstName": {
-                        "type": "string",
-                        "example": "John"
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "example": "James"
-                    },
-                    "email": {
-                        "type": "string",
-                        "example": "john@email.com"
-                    },
                     "password": {
                         "type": "string",
                         "example": "12345"
                     },
-                    "phone": {
-                        "type": "string",
-                        "example": "12345"
-                    },
-                    "userStatus": {
-                        "type": "integer",
-                        "description": "User Status",
-                        "format": "int32",
-                        "example": 1
+                    "created_at": {
+                        "type": "date",
+                        "description": "creation date",
+                        "format": "string",
+                        "example": "2023-10-08"
                     }
                 },
                 "xml": {
