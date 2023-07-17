@@ -1,4 +1,8 @@
 export enum ETablesName {
     user = "user",
-    link = "link"
+    link = "link",
+    goal = "goal",
+    menu = "menu",
+    thinking = "thinking",
+    vault = "vault"
 }
