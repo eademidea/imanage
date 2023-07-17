@@ -95,7 +95,7 @@
                 "parameters": [
                     {
                         "name": "username",
-                        "in": "query",
+                        "in": "header",
                         "description": "The user name for login",
                         "required": false,
                         "schema": {
@@ -104,7 +104,7 @@
                     },
                     {
                         "name": "password",
-                        "in": "query",
+                        "in": "header",
                         "description": "The password for login in clear text",
                         "required": false,
                         "schema": {
@@ -732,11 +732,11 @@
                     },
                     "username": {
                         "type": "string",
-                        "example": "theUser"
+                        "example": "james.stephen"
                     },
                     "password": {
                         "type": "string",
-                        "example": "12345"
+                        "example": "12345678"
                     },
                     "created_at": {
                         "type": "date",

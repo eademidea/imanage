@@ -3,7 +3,7 @@ import { UserController } from '../controllers/UserController';
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger.json')
 import * as bodyParser from 'body-parser';
-
+import Logger from 'jet-logger';
 
 export class SampleServer extends Server {
 
@@ -24,7 +24,7 @@ export class SampleServer extends Server {
 
     public start(port: number): void {
         this.app.listen(port, () => {
-            console.log('Server listening on port: ' + port);
+            Logger.info('Server listening on port: ' + port);
         })
     }
 }
