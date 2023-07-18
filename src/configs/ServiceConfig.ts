@@ -1,16 +1,20 @@
 import { Server } from '@overnightjs/core';
+import * as bodyParser from 'body-parser';
+import { Application } from 'express';
+import Logger from 'jet-logger';
 import { UserController } from '../controllers/UserController';
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger.json')
-import * as bodyParser from 'body-parser';
-import Logger from 'jet-logger';
 
 export class SampleServer extends Server {
 
     constructor() {
         super();
+    }
+
+    private setupExpress(): void {
         this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({extended: true}));
+        this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
         this.setupControllers();
     }
@@ -20,6 +24,14 @@ export class SampleServer extends Server {
         super.addControllers(
             [userController]
         );
+    }
+
+    public async init(): Promise<void> {
+        this.setupExpress();
+    }
+
+    public getApp(): Application {
+        return this.app;
     }
 
     public start(port: number): void {

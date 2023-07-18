@@ -721,11 +721,6 @@
             "User": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "number",
-                        "format": "int64",
-                        "example": 10
-                    },
                     "name": {
                         "type": "string",
                         "example": "James Stephen"
