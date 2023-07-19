@@ -11,7 +11,7 @@ export async function up(knex: Knex) {
       table.string('title').index().checkLength("<=", 50).notNullable();
       table.string('pass').index().checkLength("<=", 50).notNullable();
       table.string('user').index().checkLength("<=", 50).notNullable();
-      table.dateTime("created_at")
+      table.dateTime("created_at").defaultTo(knex.fn.now());
       table
         .bigInteger('user_id')
         .index()

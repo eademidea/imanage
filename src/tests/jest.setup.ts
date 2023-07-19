@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import { Knex } from "../database/knex";
+import { Knex } from "../database/knex"
 import { SampleServer } from "../configs/ServiceConfig"
 
 beforeAll(() => {

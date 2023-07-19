@@ -10,7 +10,7 @@ export async function up(knex: Knex) {
       table.bigIncrements('id').primary().index();
       table.string('title').index().checkLength("<=", 50).notNullable();
       table.string('thinking').index().checkLength("<=", 50).notNullable();
-      table.dateTime("created_at")
+      table.dateTime("created_at").defaultTo(knex.fn.now());
       table
         .bigInteger('user_id')
         .index()

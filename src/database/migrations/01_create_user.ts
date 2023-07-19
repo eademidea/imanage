@@ -7,8 +7,8 @@ export async function up(knex: Knex): Promise<void> {
             table.bigIncrements("id").primary().index();
             table.string("name").checkLength("<=", 150).notNullable();
             table.string("username").unique().notNullable().index()
-            table.string("password").checkLength("<=", 30)
-            table.dateTime("created_at")
+            table.string("password").checkLength("<=", 150)
+            table.dateTime("created_at").defaultTo(knex.fn.now());
             table.comment("Tabela de usuários do sistema.");
 
         }).then(() => {
