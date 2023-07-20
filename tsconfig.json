@@ -38,7 +38,7 @@
   "include": [
     "./src/**/*.ts",
     "./test/**/*.ts"
-, "src/test/jest.config.js"  ],
+, "src/tests/jest.config.js"  ],
   "exclude": [
     "./jest.config.ts",
     "./node_modules",

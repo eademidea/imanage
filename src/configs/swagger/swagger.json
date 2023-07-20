@@ -732,12 +732,6 @@
                     "password": {
                         "type": "string",
                         "example": "12345678"
-                    },
-                    "created_at": {
-                        "type": "date",
-                        "description": "creation date",
-                        "format": "string",
-                        "example": "2023-10-08"
                     }
                 },
                 "xml": {

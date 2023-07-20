@@ -1,9 +1,5 @@
-/*
- * For a detailed explanation regarding each configuration property and type check, visit:
- * https://jestjs.io/docs/configuration
- */
 
-export default {
+module.exports = {
     clearMocks: true,
 
     collectCoverage: true,
@@ -17,12 +13,10 @@ export default {
 
 
     setupFilesAfterEnv: [
-        "./jest.setup.ts"
+        "./tests/jest.setup.ts"
     ],
 
-    testMatch: [
-        '<rootDir>src/tests/**/*.test.ts'
-    ],
+    testMatch: ["<rootDir>/tests/**/*.test.ts"],
 
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest'
