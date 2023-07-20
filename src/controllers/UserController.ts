@@ -1,24 +1,40 @@
 import { Controller, Get, Middleware, Post } from '@overnightjs/core';
-import { IUser } from '@src/database/models/User';
 import { Request, Response } from 'express';
+import { IncomingHttpHeaders } from 'http';
 import { StatusCodes } from 'http-status-codes';
 import Logger from 'jet-logger';
+import { IUser } from '../database/models/User';
 import { create } from "../database/providers/users/Create";
+import { getByUsername } from '../database/providers/users/Get';
 import CreateUserValidator from "../validations/CreateUserValidator";
+import { PassowrdCrypto } from '../service/PasswordCrypto';
 @Controller("v1/user")
 export class UserController {
 
     @Get("signin")
-    public signin(req: Request, res: Response) {
-        console.log(req.headers)
-        return res.json({
-            message: 'get_called',
-        });
-    }
+    public async signin(req: IReqCustom<IUser, CustomHeaders>, res: Response) {
+        if (req.headers.username == undefined || req.headers.username == null
+             || req.headers.password == undefined || req.headers.password == null) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                message: 'Parametros informados estão incorretos',
+            });
+        }
 
-    @Get()
-    public test () {
-        console.log("Passou")
+        var username: string = req.headers.username;
+        var password: string = req.headers.password;
+        const user = await getByUsername(username);
+
+        var passIsCorrect = await PassowrdCrypto.verifyPassowrd(password, user.password);
+
+        if (!passIsCorrect) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                message: 'Usuário ou senha incorreta...',
+            });
+        }
+
+        return res.status(StatusCodes.OK).json({
+            message: "Usuário logado com sucesso."
+        });
     }
 
     @Post("signup")
@@ -37,4 +53,18 @@ export class UserController {
     }
 
 
+
+}
+
+
+
+
+interface CustomHeaders {
+    username: string,
+    password: string;
+}
+
+interface IReqCustom<TBody, THeader> extends Request {
+    body: TBody;
+    headers: IncomingHttpHeaders & THeader;
 }
