@@ -21,7 +21,10 @@ describe("Test UserController...", () => {
     })
 
     it("Test ok when try signin", () => {
-        // testService.get("/v1/user/signin").set()
+        testService.get("/v1/user/signin").send({
+            "username": "James.Steph",
+            "password": "12345678"
+        }).expect(StatusCodes.OK)
     })
 
 })

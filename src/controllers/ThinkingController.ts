@@ -5,17 +5,16 @@ import { Request, Response } from 'express';
 export class ThinkingController {
 
 
-    @Post('create')
-    public createThinking(req: Request, res: Response) {
+    @Post("create")
+    public async createThinking(req: Request, res: Response) {
         return res.json({
             message: 'Criando  Thinking',
         });
     }
 
 
-    @Get('list')
-    public listThinking(req: Request, res: Response) {
-        console.log(req.query)
+    @Get("list")
+    public async listThinking(req: Request, res: Response) {
         console.log("Cheguei aqui")
         return res.json({
             message: 'listar Thinking',

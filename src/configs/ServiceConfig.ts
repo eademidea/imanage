@@ -3,6 +3,8 @@ import * as bodyParser from 'body-parser';
 import { Application } from 'express';
 import Logger from 'jet-logger';
 import { UserController } from '../controllers/UserController';
+import { LinksController } from '../controllers/LinksController';
+import { ThinkingController } from '../controllers/ThinkingController';
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger.json')
 
@@ -21,8 +23,10 @@ export class SampleServer extends Server {
 
     private setupControllers(): void {
         const userController = new UserController();
+        const linksController = new LinksController();
+        const thinkingController = new ThinkingController();
         super.addControllers(
-            [userController]
+            [userController, linksController, thinkingController]
         );
     }
 

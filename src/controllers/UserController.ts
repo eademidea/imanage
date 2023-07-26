@@ -13,27 +13,34 @@ export class UserController {
 
     @Get("signin")
     public async signin(req: IReqCustom<IUser, CustomHeaders>, res: Response) {
-        if (req.headers.username == undefined || req.headers.username == null
-             || req.headers.password == undefined || req.headers.password == null) {
+
+        var username: string = req.headers.username;
+        var password: string = req.headers.password;
+
+        if (username == undefined || username == null
+            || password == undefined || password == null) {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 message: 'Parametros informados estão incorretos',
             });
         }
 
-        var username: string = req.headers.username;
-        var password: string = req.headers.password;
+
         const user = await getByUsername(username);
-
-        var passIsCorrect = await PassowrdCrypto.verifyPassowrd(password, user.password);
-
-        if (!passIsCorrect) {
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                message: 'Usuário ou senha incorreta...',
+        
+        if (user != undefined) {
+            var passIsCorrect = await PassowrdCrypto.verifyPassowrd(password, user.password);
+            if (!passIsCorrect) {
+                return res.status(StatusCodes.BAD_REQUEST).json({
+                    message: 'Usuário ou senha incorreta...',
+                });
+            }
+            return res.status(StatusCodes.OK).json({
+                message: "Usuário logado com sucesso."
             });
         }
-
-        return res.status(StatusCodes.OK).json({
-            message: "Usuário logado com sucesso."
+       
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            message: 'Usuário ou senha incorreta...',
         });
     }
 
