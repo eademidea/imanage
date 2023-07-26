@@ -8,7 +8,7 @@ export async function up(knex: Knex) {
     .schema
     .createTable(ETablesName.link, table => {
       table.bigIncrements('id').primary().index();
-      table.string('title').index().checkLength("<=", 150).notNullable();
+      table.string('title').index().checkLength("<=", 50).notNullable();
       table.string('link').checkLength("<=",250).notNullable();
       table.dateTime("created_at").defaultTo(knex.fn.now());
       table
