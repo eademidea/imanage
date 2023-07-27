@@ -53,7 +53,7 @@ export class UserController {
         if (response instanceof Error) {
             return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar usuario...");
         }
-        return res.json({
+        return res.status(StatusCodes.CREATED).json({
             message: `Usuário criado com sucesso...  `,
             id: response
         });

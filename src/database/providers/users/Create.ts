@@ -14,9 +14,9 @@ export const create = async (user: Omit<IUser, "id">): Promise<number | Error> =
         } else if (typeof result === 'number') {
             return result;
         }
-        return new Error('Erro ao cadastrar o registro');
+        return new Error('Erro ao cadastrar o usuario');
     } catch (error) {
         Logger.err(error);
-        return new Error('Erro ao cadastrar o registro');
+        return new Error('Erro ao cadastrar o usuario');
     }
 }

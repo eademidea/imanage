@@ -1,33 +1,53 @@
 import { Controller, Get, Middleware, Post } from '@overnightjs/core';
+import { create } from '../database/providers/links/Create';
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import log from "jet-logger";
 import { ILink } from '../database/models/Link';
 import CreateLinkValidator from '../validations/CreateLinkValidator';
-import Logger from "jet-logger";
+import { getAllLinks } from '../database/providers/links/Get';
 
 @Controller("v1/links")
 export class LinksController {
 
     @Post("create")
     @Middleware([CreateLinkValidator])
-    public newlink(req: Request<{}, {}, ILink>, res: Response) {
-        Logger.info("Entrando no método de criação de link...")
+    public async newlink(req: Request<{}, {}, ILink>, res: Response) {
+        try {
+            const response = await create(req.body);
 
-        console.log(req.body)
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar link...");
+            }
 
+            return res.status(StatusCodes.CREATED).json({
+                message: `Link criado com sucesso...  `,
+                id: response
+            });
 
-        return res.json({
-            message: 'Criando  Link',
-        });
+        } catch (err) {
+            log.err(err);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar link...");
+        }
+
     }
 
 
     @Get("list")
-    public alllink(req: Request, res: Response) {
-        console.log(req.query)
-        console.log("Cheguei aqui")
-        return res.json({
-            message: 'listar Link',
-        });
+    public async alllink(req: Request, res: Response) {
+        try {
+            const response = await getAllLinks(req.body.id)
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar link...");
+            } else {
+                return res.status(StatusCodes.OK).json({
+                    response
+                })
+            }
+        } catch (err) {
+            log.err(err);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar link...");
+        }
     }
 
 }
