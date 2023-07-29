@@ -4,14 +4,15 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import log from "jet-logger";
 import { ILink } from '../database/models/Link';
-import CreateLinkValidator from '../validations/CreateLinkValidator';
+import CreateLinkValidator from '../middleware/validations/CreateLinkValidator';
 import { getAllLinks } from '../database/providers/links/Get';
+import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
 
 @Controller("v1/links")
 export class LinksController {
 
     @Post("create")
-    @Middleware([CreateLinkValidator])
+    @Middleware([ensureAuthenticated, CreateLinkValidator])
     public async newlink(req: Request<{}, {}, ILink>, res: Response) {
         try {
             const response = await create(req.body);

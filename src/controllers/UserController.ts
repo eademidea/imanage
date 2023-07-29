@@ -6,8 +6,9 @@ import Logger from 'jet-logger';
 import { IUser } from '../database/models/User';
 import { create } from "../database/providers/users/Create";
 import { getByUsername } from '../database/providers/users/Get';
-import CreateUserValidator from "../validations/CreateUserValidator";
+import CreateUserValidator from "../middleware/validations/CreateUserValidator";
 import { PassowrdCrypto } from '../service/PasswordCrypto';
+import { JWTService } from '../service/JwtService';
 @Controller("v1/user")
 export class UserController {
 
@@ -19,27 +20,34 @@ export class UserController {
 
         if (username == undefined || username == null
             || password == undefined || password == null) {
-            return res.status(StatusCodes.BAD_REQUEST).json({
+            return res.status(StatusCodes.UNAUTHORIZED).json({
                 message: 'Parametros informados estão incorretos',
             });
         }
 
-
         const user = await getByUsername(username);
-        
+
         if (user != undefined) {
             var passIsCorrect = await PassowrdCrypto.verifyPassowrd(password, user.password);
             if (!passIsCorrect) {
-                return res.status(StatusCodes.BAD_REQUEST).json({
+                return res.status(StatusCodes.UNAUTHORIZED).json({
                     message: 'Usuário ou senha incorreta...',
                 });
             }
+            const accessToken = JWTService.sign(
+                {
+                    uid: user.id,
+                    user: user.username
+                },
+            );
             return res.status(StatusCodes.OK).json({
-                message: "Usuário logado com sucesso."
+                message: "Usuário logado com sucesso.",
+                accessToken: accessToken
+
             });
         }
-       
-        return res.status(StatusCodes.BAD_REQUEST).json({
+
+        return res.status(StatusCodes.UNAUTHORIZED).json({
             message: 'Usuário ou senha incorreta...',
         });
     }
