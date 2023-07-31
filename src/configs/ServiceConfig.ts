@@ -5,6 +5,7 @@ import Logger from 'jet-logger';
 import { UserController } from '../controllers/UserController';
 import { LinksController } from '../controllers/LinksController';
 import { ThinkingController } from '../controllers/ThinkingController';
+import { GoalsController, goalsController } from '../controllers/GoalsController';
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger.json')
 
@@ -25,8 +26,14 @@ export class SampleServer extends Server {
         const userController = new UserController();
         const linksController = new LinksController();
         const thinkingController = new ThinkingController();
+        const goalsController = new GoalsController();
         super.addControllers(
-            [userController, linksController, thinkingController]
+            [
+                userController
+                , goalsController
+                , linksController
+                , thinkingController
+            ]
         );
     }
 
