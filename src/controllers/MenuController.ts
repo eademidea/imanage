@@ -1,24 +1,54 @@
-import { Controller, Get, Post } from '@overnightjs/core';
+import { Controller, Get, Middleware, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import log from "jet-logger";
+import { create } from '../database/providers/menu/Create';
+import { getAllMenu } from '../database/providers/menu/Get';
+import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
+import CreateMenuValidator from '../middleware/validations/CreateMenuValidator';
+import { IMenu } from '../database/models/Menu';
 
 @Controller("v1/menu")
 export class MenuController {
 
     @Post('create')
-    public createMenu(req: Request, res: Response) {
-        return res.json({
-            message: 'Criando  Menu',
-        });
+    @Middleware([ensureAuthenticated, CreateMenuValidator])
+    public async createMenu(req: Request<{}, {}, IMenu>, res: Response) {
+        try {
+            const response = await create(req.body);
+
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar menu...");
+            }
+
+            return res.status(StatusCodes.CREATED).json({
+                message: `menu criado com sucesso...  `,
+                id: response
+            });
+
+        } catch (err) {
+            log.err(err);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar menu...");
+        }
     }
 
 
     @Get('list')
-    public listThinking(req: Request, res: Response) {
-        console.log(req.query)
-        console.log("Cheguei aqui")
-        return res.json({
-            message: 'listar Thinking',
-        });
+    @Middleware([ensureAuthenticated])
+    public async listMenu(req: Request, res: Response) {
+        try {
+            const response = await getAllMenu()
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar menu...");
+            } else {
+                return res.status(StatusCodes.OK).json({
+                    response
+                })
+            }
+        } catch (err) {
+            log.err(err);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar menu...");
+        }
     }
 
 }

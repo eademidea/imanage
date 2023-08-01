@@ -3,7 +3,7 @@
     "info": {
         "title": "IManage",
         "description": "Esta é a Api do IManage que consiste em um software de gerenciamento pessoal.",
-        "version": "1.0.11"
+        "version": "1.0.1"
     },
     "servers": [
         {
@@ -25,7 +25,7 @@
         },
         {
             "name": "menu",
-            "description": "Operations about menu of user"
+            "description": "Operations about menu of application"
         },
         {
             "name": "thinking",
@@ -45,6 +45,17 @@
                 "summary": "Create user",
                 "description": "This can only be done by the logged in user.",
                 "operationId": "createUser",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Created user object",
                     "content": {
@@ -95,7 +106,7 @@
                 "parameters": [
                     {
                         "name": "username",
-                        "in": "query",
+                        "in": "header",
                         "description": "The user name for login",
                         "required": false,
                         "schema": {
@@ -104,7 +115,7 @@
                     },
                     {
                         "name": "password",
-                        "in": "query",
+                        "in": "header",
                         "description": "The password for login in clear text",
                         "required": false,
                         "schema": {
@@ -157,23 +168,34 @@
                 ],
                 "summary": "Create link",
                 "description": "This can only be done by the logged in user.",
-                "operationId": "createUser",
+                "operationId": "createLink",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Created user object",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Link"
                             }
                         },
                         "application/xml": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Link"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Link"
                             }
                         }
                     }
@@ -184,12 +206,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Link"
                                 }
                             },
                             "application/xml": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Link"
                                 }
                             }
                         }
@@ -206,6 +228,15 @@
                 "description": "",
                 "operationId": "loginUser",
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "username",
                         "in": "query",
@@ -268,25 +299,36 @@
                 "tags": [
                     "menu"
                 ],
-                "summary": "Create link",
+                "summary": "Create menu",
                 "description": "This can only be done by the logged in user.",
-                "operationId": "createUser",
+                "operationId": "createMenu",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
-                    "description": "Created user object",
+                    "description": "Created menu object",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Menu"
                             }
                         },
                         "application/xml": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Menu"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Menu"
                             }
                         }
                     }
@@ -297,12 +339,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Menu"
                                 }
                             },
                             "application/xml": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Menu"
                                 }
                             }
                         }
@@ -317,7 +359,7 @@
                 ],
                 "summary": "Logs user into the system",
                 "description": "",
-                "operationId": "loginUser",
+                "operationId": "menuList",
                 "parameters": [
                     {
                         "name": "username",
@@ -381,25 +423,36 @@
                 "tags": [
                     "thinking"
                 ],
-                "summary": "Create link",
+                "summary": "Create thinking",
                 "description": "This can only be done by the logged in user.",
-                "operationId": "createUser",
+                "operationId": "createThinking",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
-                    "description": "Created user object",
+                    "description": "Created thinking object",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Thinking"
                             }
                         },
                         "application/xml": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Thinking"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Thinking"
                             }
                         }
                     }
@@ -410,12 +463,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Thinking"
                                 }
                             },
                             "application/xml": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Thinking"
                                 }
                             }
                         }
@@ -494,25 +547,36 @@
                 "tags": [
                     "goals"
                 ],
-                "summary": "Create link",
+                "summary": "Create Goals",
                 "description": "This can only be done by the logged in user.",
                 "operationId": "createUser",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
-                    "description": "Created user object",
+                    "description": "Created goal object",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Goal"
                             }
                         },
                         "application/xml": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Goal"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/Goal"
                             }
                         }
                     }
@@ -607,9 +671,20 @@
                 "tags": [
                     "vault"
                 ],
-                "summary": "Create link",
+                "summary": "Create Vault",
                 "description": "This can only be done by the logged in user.",
-                "operationId": "createUser",
+                "operationId": "createVault",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Created user object",
                     "content": {
@@ -721,44 +796,117 @@
             "User": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 10
+                    "name": {
+                        "type": "string",
+                        "example": "James Stephen"
                     },
                     "username": {
                         "type": "string",
-                        "example": "theUser"
-                    },
-                    "firstName": {
-                        "type": "string",
-                        "example": "John"
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "example": "James"
-                    },
-                    "email": {
-                        "type": "string",
-                        "example": "john@email.com"
+                        "example": "james.stephen"
                     },
                     "password": {
                         "type": "string",
-                        "example": "12345"
-                    },
-                    "phone": {
-                        "type": "string",
-                        "example": "12345"
-                    },
-                    "userStatus": {
-                        "type": "integer",
-                        "description": "User Status",
-                        "format": "int32",
-                        "example": 1
+                        "example": "12345678"
                     }
                 },
                 "xml": {
                     "name": "user"
+                }
+            },
+            "Link": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Google"
+                    },
+                    "link": {
+                        "link": "string",
+                        "example": "https://google.com.br"
+                    },
+                    "user_id": {
+                        "user_id": "number",
+                        "example": 1
+                    }
+                },
+                "xml": {
+                    "name": "link"
+                }
+            },
+            "Goal": {
+                "type": "object",
+                "properties": {
+                    "goal": {
+                        "type": "string",
+                        "example": "Vencer o campeonato nacional!"
+                    },
+                    "user_id": {
+                        "type": "number",
+                        "example": 1
+                    }
+                },
+                "xml": {
+                    "name": "goal"
+                }
+            },
+            "Menu": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Links Cadastrados"
+                    },
+                    "page": {
+                        "type": "string",
+                        "example": "./links-cadastrados"
+                    }
+                },
+                "xml": {
+                    "name": "menu"
+                }
+            },
+            "Thinking": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Faça!"
+                    },
+                    "thinking": {
+                        "type": "string",
+                        "example": "Faça não importa quando."
+                    },
+                    "user_id": {
+                        "type": "number",
+                        "example": 1
+                    }
+                },
+                "xml": {
+                    "name": "thinking"
+                }
+            },
+            "Vault": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Login do IManage"
+                    },
+                    "pass": {
+                        "type": "string",
+                        "example": "james.stephen"
+                    },
+                    "user": {
+                        "type": "string",
+                        "example": "12345678"
+                    },
+                    "user_id": {
+                        "type": "number",
+                        "example": 1
+                    }
+                },
+                "xml": {
+                    "name": "vault"
                 }
             },
             "ApiResponse": {
@@ -793,25 +941,6 @@
                         }
                     }
                 }
-            }
-        },
-        "securitySchemes": {
-            "petstore_auth": {
-                "type": "oauth2",
-                "flows": {
-                    "implicit": {
-                        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
-                        "scopes": {
-                            "write:pets": "modify pets in your account",
-                            "read:pets": "read your pets"
-                        }
-                    }
-                }
-            },
-            "api_key": {
-                "type": "apiKey",
-                "name": "api_key",
-                "in": "header"
             }
         }
     }

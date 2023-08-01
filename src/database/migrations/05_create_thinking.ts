@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -10,7 +10,7 @@ export async function up(knex: Knex) {
       table.bigIncrements('id').primary().index();
       table.string('title').index().checkLength("<=", 50).notNullable();
       table.string('thinking').index().checkLength("<=", 50).notNullable();
-      table.dateTime("created_at")
+      table.dateTime("created_at").defaultTo(knex.fn.now());
       table
         .bigInteger('user_id')
         .index()
@@ -24,7 +24,7 @@ export async function up(knex: Knex) {
       table.comment('Tabela usada para armazenar pensamentos dos usuários no sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.thinking}`);
+      log.info(`# Created table ${ETablesName.thinking}`);
     });
 }
 
@@ -33,6 +33,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.thinking)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.thinking}`);
+      log.info(`# Dropped table ${ETablesName.thinking}`);
     });
 }
