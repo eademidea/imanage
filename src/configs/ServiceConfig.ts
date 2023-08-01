@@ -2,10 +2,12 @@ import { Server } from '@overnightjs/core';
 import * as bodyParser from 'body-parser';
 import { Application } from 'express';
 import Logger from 'jet-logger';
-import { UserController } from '../controllers/UserController';
+import { GoalsController } from '../controllers/GoalsController';
 import { LinksController } from '../controllers/LinksController';
+import { MenuController } from '../controllers/MenuController';
 import { ThinkingController } from '../controllers/ThinkingController';
-import { GoalsController, goalsController } from '../controllers/GoalsController';
+import { UserController } from '../controllers/UserController';
+import { VaultController } from '../controllers/VaultController';
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger.json')
 
@@ -27,12 +29,16 @@ export class SampleServer extends Server {
         const linksController = new LinksController();
         const thinkingController = new ThinkingController();
         const goalsController = new GoalsController();
+        const vaultController = new VaultController();
+        const menuController = new MenuController();
         super.addControllers(
             [
                 userController
                 , goalsController
                 , linksController
+                , menuController
                 , thinkingController
+                , vaultController
             ]
         );
     }

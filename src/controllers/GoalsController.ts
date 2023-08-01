@@ -5,7 +5,7 @@ import log from "jet-logger";
 import { create } from '../database/providers/goals/Create';
 import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
 import CreateGoalsValidator from '../middleware/validations/CreateGoalsValidator';
-import { getAllLinks } from '@src/database/providers/links/Get';
+import { getAllLinks } from '../database/providers/links/Get';
 @Controller("v1/goals")
 export class GoalsController {
 
@@ -31,6 +31,7 @@ export class GoalsController {
 
 
     @Get('list')
+    @Middleware([ensureAuthenticated])
     public async listGoals(req: Request, res: Response) {
         try {
             const response = await getAllLinks(req.body.id)

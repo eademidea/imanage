@@ -35,6 +35,7 @@ export class LinksController {
 
 
     @Get("list")
+    @Middleware([ensureAuthenticated])
     public async alllink(req: Request, res: Response) {
         try {
             const response = await getAllLinks(req.body.id)
