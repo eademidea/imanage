@@ -6,12 +6,13 @@ import { create } from '../database/providers/goals/Create';
 import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
 import CreateGoalsValidator from '../middleware/validations/CreateGoalsValidator';
 import { getAllLinks } from '../database/providers/links/Get';
+import { IGoals } from '../database/models/Goals';
 @Controller("v1/goals")
 export class GoalsController {
 
     @Post('create')
     @Middleware([ensureAuthenticated, CreateGoalsValidator])
-    public async createGoals(req: Request, res: Response) {
+    public async createGoals(req: Request<{}, {}, IGoals>, res: Response) {
         try {
             const response = await create(req.body);
             if (response instanceof Error) {

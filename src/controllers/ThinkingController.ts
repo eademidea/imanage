@@ -7,13 +7,14 @@ import { getAllThinking } from '../database/providers/thinking/Get';
 
 import CreateThinkingValidator from '../middleware/validations/CreateThinkingValidator';
 import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
+import { IThinking } from '../database/models/Thinking';
 @Controller("v1/thinking")
 export class ThinkingController {
 
 
     @Post("create")
     @Middleware([ensureAuthenticated, CreateThinkingValidator])
-    public async createThinking(req: Request, res: Response) {
+    public async createThinking(req: Request<{}, {}, IThinking>, res: Response) {
         try {
             const response = await create(req.body);
             if (response instanceof Error) {

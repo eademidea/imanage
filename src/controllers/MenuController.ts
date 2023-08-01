@@ -6,13 +6,14 @@ import { create } from '../database/providers/menu/Create';
 import { getAllMenu } from '../database/providers/menu/Get';
 import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
 import CreateMenuValidator from '../middleware/validations/CreateMenuValidator';
+import { IMenu } from '../database/models/Menu';
 
 @Controller("v1/menu")
 export class MenuController {
 
     @Post('create')
     @Middleware([ensureAuthenticated, CreateMenuValidator])
-    public async createMenu(req: Request, res: Response) {
+    public async createMenu(req: Request<{}, {}, IMenu>, res: Response) {
         try {
             const response = await create(req.body);
 

@@ -42,7 +42,7 @@ export class UserController {
             );
             return res.status(StatusCodes.OK).json({
                 message: "Usuário logado com sucesso.",
-                accessToken: accessToken
+                accessToken: `Bearer ${accessToken}`
 
             });
         }
@@ -57,7 +57,6 @@ export class UserController {
     public async signup(req: Request<{}, {}, IUser>, res: Response) {
         Logger.info("Entrando no método signup...", true)
         var response = await create(req.body);
-        console.log(response)
         if (response instanceof Error) {
             return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao criar usuario...");
         }

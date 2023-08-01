@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -23,7 +23,7 @@ export async function up(knex: Knex) {
       table.comment('Tabela usada para armazenar objetivos dos usuários no sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.goal}`);
+      log.info(`# Created table ${ETablesName.goal}`);
     });
 }
 
@@ -32,6 +32,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.goal)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.goal}`);
+      log.info(`# Dropped table ${ETablesName.goal}`);
     });
 }

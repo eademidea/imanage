@@ -3,10 +3,9 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import log from "jet-logger";
 import { create } from '../database/providers/vaults/Create';
-import { getAllThinking } from '../database/providers/thinking/Get';
-
 import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
 import CreateVaultValidator from '../middleware/validations/CreateVaultValidator';
+import { getAllVaults } from '../database/providers/vaults/Get';
 
 @Controller("v1/vault")
 export class VaultController {
@@ -36,7 +35,7 @@ export class VaultController {
     @Middleware([ensureAuthenticated])
     public async listVaults(req: Request, res: Response) {
         try {
-            const response = await getAllThinking(req.body.id)
+            const response = await getAllVaults(req.body.id)
             if (response instanceof Error) {
                 return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar Vault...");
             } else {

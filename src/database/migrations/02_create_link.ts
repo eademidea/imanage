@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -24,7 +24,7 @@ export async function up(knex: Knex) {
       table.comment('Tabela usada para armazenar link dos usuários no sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.link}`);
+      log.info(`# Created table ${ETablesName.link}`);
     });
 }
 
@@ -33,6 +33,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.link)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.link}`);
+      log.info(`# Dropped table ${ETablesName.link}`);
     });
 }

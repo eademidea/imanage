@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -25,7 +25,7 @@ export async function up(knex: Knex) {
       table.comment('Tabela usada para armazenar vaults dos usuários no sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.vault}`);
+      log.info(`# Created table ${ETablesName.vault}`);
     });
 }
 
@@ -34,6 +34,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.vault)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.vault}`);
+      log.info(`# Dropped table ${ETablesName.vault}`);
     });
 }
