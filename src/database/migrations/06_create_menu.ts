@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -10,11 +10,11 @@ export async function up(knex: Knex) {
       table.bigIncrements('id').primary().index();
       table.string('name').index().checkLength("<=", 50).notNullable();
       table.string('page').index().checkLength("<=", 100).notNullable();
-      table.dateTime("created_at")
+      table.dateTime("created_at").defaultTo(knex.fn.now());
       table.comment('Tabela usada para armazenar  menus do sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.menu}`);
+      log.info(`# Created table ${ETablesName.menu}`);
     });
 }
 
@@ -23,6 +23,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.menu)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.menu}`);
+      log.info(`# Dropped table ${ETablesName.menu}`);
     });
 }

@@ -1,24 +1,52 @@
-import { Controller, Get, Post } from '@overnightjs/core';
+import { Controller, Get, Middleware, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
-
+import { StatusCodes } from 'http-status-codes';
+import log from "jet-logger";
+import { create } from '../database/providers/goals/Create';
+import { ensureAuthenticated } from '../middleware/EnsureAuthenticated';
+import CreateGoalsValidator from '../middleware/validations/CreateGoalsValidator';
+import { getAllLinks } from '../database/providers/links/Get';
+import { IGoals } from '../database/models/Goals';
 @Controller("v1/goals")
 export class GoalsController {
 
     @Post('create')
-    public createGoals(req: Request, res: Response) {
-        return res.json({
-            message: 'Criando  Goals',
-        });
+    @Middleware([ensureAuthenticated, CreateGoalsValidator])
+    public async createGoals(req: Request<{}, {}, IGoals>, res: Response) {
+        try {
+            const response = await create(req.body);
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao cadastrar objetivo...");
+            }
+
+            return res.status(StatusCodes.CREATED).json({
+                message: `Objetivo cadastrado com sucesso...  `,
+                id: response
+            });
+        } catch (error) {
+            log.err(error);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao cadastrar objetivo...");
+        }
+
     }
 
 
     @Get('list')
-    public listGoals(req: Request, res: Response) {
-        console.log(req.query)
-        console.log("Cheguei aqui")
-        return res.json({
-            message: 'listar Goals',
-        });
-    }
+    @Middleware([ensureAuthenticated])
+    public async listGoals(req: Request, res: Response) {
+        try {
+            const response = await getAllLinks(req.body.id)
+            if (response instanceof Error) {
+                return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar objetivo...");
+            } else {
+                return res.status(StatusCodes.OK).json({
+                    response
+                })
+            }
+        } catch (error) {
+            log.err(error);
+            return res.status(StatusCodes.BAD_GATEWAY).json("Erro ao buscar objetivo...");
+        }
 
+    }
 }

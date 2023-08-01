@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-
+import log from "jet-logger";
 import { ETablesName } from '../TableNames';
 
 
@@ -11,7 +11,7 @@ export async function up(knex: Knex) {
       table.string('title').index().checkLength("<=", 50).notNullable();
       table.string('pass').index().checkLength("<=", 50).notNullable();
       table.string('user').index().checkLength("<=", 50).notNullable();
-      table.dateTime("created_at")
+      table.dateTime("created_at").defaultTo(knex.fn.now());
       table
         .bigInteger('user_id')
         .index()
@@ -25,7 +25,7 @@ export async function up(knex: Knex) {
       table.comment('Tabela usada para armazenar vaults dos usuários no sistema.');
     })
     .then(() => {
-      console.log(`# Created table ${ETablesName.vault}`);
+      log.info(`# Created table ${ETablesName.vault}`);
     });
 }
 
@@ -34,6 +34,6 @@ export async function down(knex: Knex) {
     .schema
     .dropTable(ETablesName.vault)
     .then(() => {
-      console.log(`# Dropped table ${ETablesName.vault}`);
+      log.info(`# Dropped table ${ETablesName.vault}`);
     });
 }
