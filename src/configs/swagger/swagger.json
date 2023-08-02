@@ -45,17 +45,6 @@
                 "summary": "Create user",
                 "description": "This can only be done by the logged in user.",
                 "operationId": "createUser",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Auth for login",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "description": "Created user object",
                     "content": {
