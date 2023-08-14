@@ -2,7 +2,7 @@
 IManage
 
 1º Considere instalar o sqlite3. <br>
-2º Node precisa estár funcionando <br>
+2º Node precisa estar funcionando <br>
 3º Tenha o Yarn devidamente instalado. <br>
 4º Faça a importação das tabelas: no terminal digite "knex:migrate". <br>
 5º Instale as dependencias "yarn test". <br>
