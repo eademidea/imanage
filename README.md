@@ -1,5 +1,5 @@
 # imanage
-IManage é um gerenciador pessoal, o que significa que poderá usalo para organizar informações importantes do dia a dia.
+IManage é um gerenciador pessoal e tem finalidade de organizar informações importantes do dia a dia.
 
 1º Considere instalar o sqlite3. <br>
 2º Node precisa estar funcionando <br>
