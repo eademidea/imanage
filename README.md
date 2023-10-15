@@ -1,4 +1,4 @@
-# imanage
+
 IManage é um gerenciador pessoal e tem finalidade de organizar informações importantes do dia a dia.
 
 1º Considere instalar o sqlite3. <br>
